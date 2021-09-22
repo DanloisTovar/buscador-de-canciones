@@ -36,6 +36,7 @@ function buscarCancion(e) {
 
   // consultar API:
   busqueda.consultarApi();
+  // restear formulario:
   setTimeout(() => {
     UI.formularioBuscar.reset();
   }, 5000);
