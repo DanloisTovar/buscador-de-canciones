@@ -1,4 +1,5 @@
 import * as UI from './interfaz.js';
+import llamarApi from './api.js';
 
 UI.formularioBuscar.addEventListener('submit', buscarCancion);
 
@@ -11,7 +12,7 @@ function buscarCancion(e) {
   e.preventDefault();
   // obtener datos:
   const artista = document.querySelector('#artista').value;
-  const cancion = document.querySelector('#artista').value;
+  const cancion = document.querySelector('#cancion').value;
 
   // validacion de campos:
   if (artista === '' || cancion === '') {
@@ -24,10 +25,18 @@ function buscarCancion(e) {
     setTimeout(() => {
       UI.divMensajes.textContent = '';
       UI.divMensajes.classList.remove('error');
+      UI.divResultado.remove();
     }, 5000);
 
     return;
   }
 
-  // llamar api: https
+  // llamar api:
+  const busqueda = new llamarApi(artista, cancion);
+
+  // consultar API:
+  busqueda.consultarApi();
+  setTimeout(() => {
+    UI.formularioBuscar.reset();
+  }, 5000);
 }
